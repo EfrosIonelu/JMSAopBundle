@@ -33,12 +33,17 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('jms_aop')
+        $treeBuilder = new TreeBuilder('jms_aop');
+
+        $rootNode = $treeBuilder->getRootNode();
+
+        $rootNode
             ->children()
-                ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/jms_aop')->end()
+            ->scalarNode('cache_dir')
+            ->cannotBeEmpty()
+            ->defaultValue('%kernel.cache_dir%/jms_aop')
             ->end()
-        ;
+            ->end();
 
         return $treeBuilder;
     }
